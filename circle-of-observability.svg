@@ -1,0 +1,157 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1000" viewBox="0 0 1600 1000" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif">
+  <defs>
+    <radialGradient id="sky" cx="50%" cy="46%" r="75%">
+      <stop offset="0%"  stop-color="#fff6d5"/>
+      <stop offset="24%" stop-color="#ffd15c"/>
+      <stop offset="48%" stop-color="#f6912b"/>
+      <stop offset="72%" stop-color="#d1521f"/>
+      <stop offset="100%" stop-color="#5c160f"/>
+    </radialGradient>
+    <radialGradient id="sun" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#fffdf3"/><stop offset="55%" stop-color="#ffe58a"/><stop offset="100%" stop-color="#ffb43f"/>
+    </radialGradient>
+    <linearGradient id="hill1" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#7a2413"/><stop offset="100%" stop-color="#4a140a"/></linearGradient>
+    <linearGradient id="hill2" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#3d0f08"/><stop offset="100%" stop-color="#230703"/></linearGradient>
+    <!-- snake body: golden-green with darker edges for roundness -->
+    <linearGradient id="snakeBody" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#8fce6b"/><stop offset="45%" stop-color="#4f9e46"/><stop offset="100%" stop-color="#2c6b34"/>
+    </linearGradient>
+    <radialGradient id="node" cx="38%" cy="32%" r="80%">
+      <stop offset="0%" stop-color="#26261f"/><stop offset="100%" stop-color="#0d0d0c"/>
+    </radialGradient>
+    <filter id="glow" x="-60%" y="-60%" width="220%" height="220%"><feGaussianBlur stdDeviation="9" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+    <filter id="softglow" x="-80%" y="-80%" width="260%" height="260%"><feGaussianBlur stdDeviation="26"/></filter>
+    <filter id="tshadow" x="-30%" y="-30%" width="160%" height="160%"><feDropShadow dx="0" dy="1.5" stdDeviation="3" flood-color="#1c0703" flood-opacity="0.9"/></filter>
+  </defs>
+
+  <!-- BACKGROUND (kept) -->
+  <rect width="1600" height="1000" fill="url(#sky)"/>
+  <circle cx="800" cy="470" r="300" fill="#ffdf7a" opacity="0.5" filter="url(#softglow)"/>
+  <circle cx="800" cy="470" r="250" fill="url(#sun)" opacity="0.9"/>
+  <path d="M0 720 C 260 660 520 700 760 690 C 1040 678 1320 712 1600 672 L1600 1000 L0 1000 Z" fill="url(#hill1)"/>
+  <path d="M0 812 C 300 770 560 812 900 800 C 1200 790 1420 820 1600 792 L1600 1000 L0 1000 Z" fill="url(#hill2)"/>
+  <g fill="#1c0803">
+    <g transform="translate(150 704)"><path d="M0 0 C -4 -46 -6 -70 -2 -96 M0 0 C 6 -50 8 -74 3 -104" stroke="#1c0803" stroke-width="7" fill="none"/><ellipse cx="6" cy="-108" rx="74" ry="16"/></g>
+    <g transform="translate(1440 668) scale(0.82)"><path d="M0 0 C -4 -46 -6 -70 -2 -96 M0 0 C 6 -50 8 -74 3 -104" stroke="#1c0803" stroke-width="7" fill="none"/><ellipse cx="6" cy="-108" rx="80" ry="17"/></g>
+  </g>
+
+  <!-- ===== CYCLE DIAGRAM ===== centre (800,470) ring R=208 -->
+  <!-- inner dashed ring + centre label (Virtuous-Cycle style) -->
+  <circle cx="800" cy="470" r="120" fill="none" stroke="#3a1108" stroke-width="3" stroke-dasharray="4 12" opacity="0.75"/>
+  <g text-anchor="middle" fill="#2a0d07" filter="url(#tshadow)">
+    <text x="800" y="452" font-size="30" font-weight="800" letter-spacing="1">THE CIRCLE OF</text>
+    <text x="800" y="486" font-size="30" font-weight="800" letter-spacing="1">OBSERVABILITY</text>
+    <text x="800" y="514" font-size="15" font-weight="600" letter-spacing="2" opacity="0.8">SELF&#8209;CONSUMING TELEMETRY</text>
+  </g>
+
+  <!-- clockwise flow arrows on the ring (right, bottom, left) -->
+  <g stroke="#fff2cf" stroke-width="7" fill="none" stroke-linecap="round" stroke-linejoin="round" filter="url(#tshadow)">
+    <path d="M1002 452 L1012 470 L1002 488"/>            <!-- right, pointing down -->
+    <path d="M818 676 L800 686 L782 676"/>               <!-- bottom, pointing left -->
+    <path d="M598 488 L588 470 L598 452"/>               <!-- left, pointing up -->
+  </g>
+
+  <!-- ===== OUROBOROS SNAKE (forms the loop, eats its tail at top) ===== -->
+  <!-- body -->
+  <path d="M836,265 A208,208 0 1 1 764,265" fill="none" stroke="#22331f" stroke-width="36" stroke-linecap="round"/>
+  <path d="M836,265 A208,208 0 1 1 764,265" fill="none" stroke="url(#snakeBody)" stroke-width="30" stroke-linecap="round"/>
+  <!-- belly highlight -->
+  <path d="M828,276 A196,196 0 1 1 772,276" fill="none" stroke="#ffe6a8" stroke-width="8" stroke-linecap="round" opacity="0.55"/>
+  <!-- scale flecks -->
+  <g stroke="#2c6b34" stroke-width="3" opacity="0.55" fill="none" stroke-linecap="round">
+    <path d="M994 350 q10 8 4 20"/><path d="M1012 470 q12 0 12 14"/><path d="M986 596 q9 -8 20 -4"/>
+    <path d="M800 678 q0 12 -14 12"/><path d="M604 596 q-10 8 -20 4"/><path d="M588 470 q-12 0 -12 14"/><path d="M614 350 q-10 8 -4 20"/>
+  </g>
+
+  <!-- TAIL tip (thin, disappears into the mouth) -->
+  <path d="M764,265 C 782,258 792,256 800,255 L800,266 C 792,268 782,270 766,278 Z" fill="#3f8a3f"/>
+  <!-- HEAD (biting the tail at top-centre) -->
+  <g>
+    <path d="M834,282 C 862,270 862,242 840,232 C 820,223 800,228 792,242
+             C 800,250 800,258 800,258 C 792,255 782,256 772,258
+             C 786,272 812,292 834,282 Z" fill="#5aa84e" stroke="#22331f" stroke-width="2"/>
+    <!-- lower jaw -->
+    <path d="M792,242 C 786,252 788,262 800,266 C 792,262 792,254 792,242 Z" fill="#3f7a38"/>
+    <!-- eye -->
+    <circle cx="836" cy="252" r="5.5" fill="#fff3c4"/><circle cx="837" cy="252" r="2.6" fill="#1c0703"/>
+    <!-- forked tongue flicking at the tail -->
+    <path d="M792,250 C 782,250 776,247 770,246 M770,246 l-6,-3 M770,246 l-6,3" stroke="#d03b3b" stroke-width="2.4" fill="none" stroke-linecap="round"/>
+  </g>
+
+  <!-- ===== NODES + ICONS + LABELS ===== -->
+  <!-- stubs from ring to icon circles -->
+  <g stroke="#2a0d07" stroke-width="3" opacity="0.7">
+    <line x1="947" y1="323" x2="1006" y2="264"/>
+    <line x1="947" y1="617" x2="1006" y2="676"/>
+    <line x1="653" y1="617" x2="594" y2="676"/>
+    <line x1="653" y1="323" x2="594" y2="264"/>
+  </g>
+
+  <!-- NE (1) EMIT : broadcast -->
+  <g transform="translate(1040,230)">
+    <circle r="50" fill="url(#node)" stroke="#fff2cf" stroke-width="2.5"/>
+    <g stroke="#fff2cf" stroke-width="3.4" fill="none" stroke-linecap="round">
+      <circle cx="0" cy="0" r="4" fill="#fff2cf" stroke="none"/>
+      <path d="M-11 -11 A16 16 0 0 0 -11 11"/><path d="M-20 -20 A28 28 0 0 0 -20 20"/>
+      <path d="M11 -11 A16 16 0 0 1 11 11"/><path d="M20 -20 A28 28 0 0 1 20 20"/>
+    </g>
+    <circle cx="-38" cy="-38" r="15" fill="#3987e5"/><text x="-38" y="-33" font-size="17" font-weight="800" fill="#fff" text-anchor="middle">1</text>
+  </g>
+  <g text-anchor="start" filter="url(#tshadow)" fill="#fff2cf">
+    <text x="1100" y="196" font-size="21" font-weight="800" letter-spacing="1.5">EMIT</text>
+    <text x="1100" y="222" font-size="16" fill="#ffe6a8">Connect emits OpenTelemetry —</text>
+    <text x="1100" y="244" font-size="16" fill="#ffe6a8">metrics, logs &amp; traces.</text>
+  </g>
+
+  <!-- SE (2) PUSH : OTLP send (paper plane) -->
+  <g transform="translate(1040,710)">
+    <circle r="50" fill="url(#node)" stroke="#fff2cf" stroke-width="2.5"/>
+    <g stroke="#fff2cf" stroke-width="3.2" fill="none" stroke-linejoin="round" stroke-linecap="round">
+      <polygon points="-22,-6 22,-20 8,22 -1,6" fill="none"/><line x1="-1" y1="6" x2="22" y2="-20"/>
+    </g>
+    <circle cx="-38" cy="-38" r="15" fill="#199e70"/><text x="-38" y="-33" font-size="17" font-weight="800" fill="#fff" text-anchor="middle">2</text>
+  </g>
+  <g text-anchor="start" filter="url(#tshadow)" fill="#fff2cf">
+    <text x="1100" y="700" font-size="21" font-weight="800" letter-spacing="1.5">PUSH</text>
+    <text x="1100" y="726" font-size="16" fill="#ffe6a8">Embedded collector sends</text>
+    <text x="1100" y="748" font-size="16" fill="#ffe6a8">OTLP/HTTP back to itself.</text>
+  </g>
+
+  <!-- SW (3) INGEST : database -->
+  <g transform="translate(560,710)">
+    <circle r="50" fill="url(#node)" stroke="#fff2cf" stroke-width="2.5"/>
+    <g stroke="#fff2cf" stroke-width="3.2" fill="none" stroke-linecap="round">
+      <ellipse cx="0" cy="-15" rx="20" ry="7"/>
+      <path d="M-20 -15 V15 A20 7 0 0 0 20 15 V-15"/>
+      <path d="M-20 0 A20 7 0 0 0 20 0"/>
+    </g>
+    <circle cx="38" cy="-38" r="15" fill="#d95926"/><text x="38" y="-33" font-size="17" font-weight="800" fill="#fff" text-anchor="middle">3</text>
+  </g>
+  <g text-anchor="end" filter="url(#tshadow)" fill="#fff2cf">
+    <text x="500" y="700" font-size="21" font-weight="800" letter-spacing="1.5">INGEST</text>
+    <text x="500" y="726" font-size="16" fill="#ffe6a8">FastAPI receiver decodes</text>
+    <text x="500" y="748" font-size="16" fill="#ffe6a8">&amp; stores it in DuckDB.</text>
+  </g>
+
+  <!-- NW (4) DISPLAY : browser/iframe -->
+  <g transform="translate(560,230)">
+    <circle r="50" fill="url(#node)" stroke="#fff2cf" stroke-width="2.5"/>
+    <g stroke="#fff2cf" stroke-width="2.8" fill="none" stroke-linecap="round">
+      <rect x="-24" y="-18" width="48" height="36" rx="4"/><line x1="-24" y1="-7" x2="24" y2="-7"/>
+      <circle cx="-19" cy="-13" r="1.6" fill="#fff2cf" stroke="none"/><circle cx="-14" cy="-13" r="1.6" fill="#fff2cf" stroke="none"/>
+      <polyline points="-17,10 -8,1 -1,6 9,-4 17,2" stroke="#3987e5"/>
+    </g>
+    <circle cx="38" cy="-38" r="15" fill="#c98500"/><text x="38" y="-33" font-size="17" font-weight="800" fill="#fff" text-anchor="middle">4</text>
+  </g>
+  <g text-anchor="end" filter="url(#tshadow)" fill="#fff2cf">
+    <text x="500" y="196" font-size="21" font-weight="800" letter-spacing="1.5">DISPLAY</text>
+    <text x="500" y="222" font-size="16" fill="#ffe6a8">Connect's System Metrics tab</text>
+    <text x="500" y="244" font-size="16" fill="#ffe6a8">renders it — via an iframe.</text>
+  </g>
+
+  <!-- TITLE -->
+  <g text-anchor="middle">
+    <text x="800" y="912" font-size="52" font-weight="800" fill="#fff2cf" letter-spacing="1.5" filter="url(#glow)">The Circle of Observability</text>
+    <text x="800" y="952" font-size="23" fill="#ffe6a8">Posit Connect devours its own OpenTelemetry — and beholds it through an iframe.</text>
+  </g>
+</svg>
