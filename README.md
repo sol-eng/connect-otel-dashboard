@@ -43,7 +43,10 @@ python test_ingest.py        # posts synthetic OTLP, asserts it lands
 
 ## Deploy to Connect
 
-The entrypoint is the ASGI object `app:app`.
+The entrypoint is the ASGI object `app:app`. Deploy either way below — both
+produce identical content.
+
+### Option A — CLI (`rsconnect-python`)
 
 ```bash
 rsconnect deploy fastapi \
@@ -52,7 +55,29 @@ rsconnect deploy fastapi \
   .
 ```
 
-Then, in the content's **Access** settings, set access to **Anyone – no login
+### Option B — Git-backed publishing
+
+This repo ships a committed `manifest.json`, so Connect can pull and build it
+directly from Git — no local checkout or `rsconnect` install required.
+
+1. In Connect, click **Publish → Import from Git**.
+2. Repository URL: `https://github.com/sol-eng/connect-otel-dashboard.git`
+3. Branch: `main`. Connect detects the `manifest.json` at `[root directory]`.
+4. Give it a title and click **Deploy Content**.
+
+Regenerate `manifest.json` after changing the entrypoint or dependencies:
+
+```bash
+rsconnect write-manifest fastapi --entrypoint app:app \
+  --exclude 'circle-of-observability.*' --exclude 'test_ingest.py' \
+  --exclude '*.duckdb' --exclude '*.duckdb.wal' --overwrite .
+```
+
+Commit the updated `manifest.json`; Connect redeploys from the tracked file.
+
+### Required content settings (either option)
+
+In the content's **Access** settings, set access to **Anyone – no login
 required** (see the auth constraint below), and in **Runtime** settings pin:
 
 - **Min processes = 1** and **Max processes = 1** — always warm, single-writer.
